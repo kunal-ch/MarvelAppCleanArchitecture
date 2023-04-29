@@ -1,10 +1,8 @@
-package com.kc.marvelapp.data.repository
+package com.kc.marvelapp.domain.repository
 
 import com.kc.marvelapp.data.mapper.toAllCharactersResponse
 import com.kc.marvelapp.data.service.dto.*
-import com.kc.marvelapp.domain.models.AllCharactersResponse
 import com.kc.marvelapp.domain.models.ComicCharacter
-import com.kc.marvelapp.domain.repository.MarvelRepository
 import com.kc.marvelapp.util.Resource
 import io.mockk.mockk
 import kotlinx.coroutines.flow.Flow
