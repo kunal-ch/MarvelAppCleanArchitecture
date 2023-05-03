@@ -1,32 +1,24 @@
 package com.kc.marvelapp.data.mapper
 
 import com.kc.marvelapp.data.service.dto.*
-import com.kc.marvelapp.domain.models.AllCharactersResponse
-import com.kc.marvelapp.domain.models.AllCharactersResponse.Data
-import com.kc.marvelapp.domain.models.ComicCharacter
-import com.kc.marvelapp.domain.models.ComicCharacter.*
-import com.kc.marvelapp.domain.models.ComicCharacter.Comics.Item
+import com.kc.marvelapp.domain.models.*
 
-fun AllCharactersResponseDto.toAllCharactersResponse(): AllCharactersResponse {
-    return AllCharactersResponse(
+fun AllCharactersResponseDto.toAllCharactersResponse() = AllCharactersResponse(
         code = code,
         data = getData(dataDto),
         status = status
     )
-}
 
-fun getData(dataDto: DataDto) : Data {
-    return Data(
+private fun getData(dataDto: DataDto) = Data(
         count = dataDto.count,
         limit = dataDto.limit,
         offset = dataDto.offset,
         total = dataDto.total,
         characters = getComicCharacters(dataDto.resultDtos),
     )
-}
 
-fun getComicCharacters(dtoList : List<ResultDto>): List<ComicCharacter> {
-    var comicCharList = ArrayList<ComicCharacter>()
+private fun getComicCharacters(dtoList : List<ResultDto>): List<ComicCharacter> {
+    val comicCharList = ArrayList<ComicCharacter>()
     dtoList.map {
         val comicCharacter = ComicCharacter(
             id = it.id,
@@ -42,33 +34,22 @@ fun getComicCharacters(dtoList : List<ResultDto>): List<ComicCharacter> {
     return comicCharList
 }
 
-fun getComics(dto : ComicsDto) : Comics {
-    return Comics(
+private fun getComics(dto : ComicsDto) = Comics(
         available = dto.available,
         collectionURI = dto.collectionURI,
         returned = dto.returned,
         items = getItems(dto.itemDtos),
     )
-}
 
-fun getItems(dto: List<ItemDto>) : List<Item> {
-    var itemList = ArrayList<Item>()
+private fun getItems(dto: List<ItemDto>) : List<Item> {
+    val itemList = ArrayList<Item>()
     dto.map {
         itemList.add(getItem(it))
     }
     return itemList
 }
 
-fun getItem(dto : ItemDto) : Item {
-    return Item(
-        name = dto.name,
-        resourceURI = dto.resourceURI,
-    )
-}
+private fun getItem(dto : ItemDto) = Item(name = dto.name, resourceURI = dto.resourceURI)
 
-fun getThumbnail(dto : ThumbnailDto) : Thumbnail {
-    return Thumbnail(
-        extension = dto.extension,
-        path = dto.path,
-    )
-}
+private fun getThumbnail(dto : ThumbnailDto) = Thumbnail(extension = dto.extension, path = dto.path)
+
