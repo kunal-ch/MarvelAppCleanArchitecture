@@ -6,8 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kc.marvelapp.domain.repository.MarvelRepository
-import com.kc.marvelapp.domain.use_case.get_character.GetCharacterUseCase
+import com.kc.marvelapp.domain.usecase.getCharacter.GetCharacterUseCase
 import com.kc.marvelapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

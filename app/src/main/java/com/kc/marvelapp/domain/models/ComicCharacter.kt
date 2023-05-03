@@ -8,20 +8,4 @@ data class ComicCharacter(
     val resourceURI: String,
     val thumbnail: Thumbnail,
     val comics: Comics
-) {
-    data class Comics(
-        val available: Int,
-        val collectionURI: String,
-        val items: List<Item>,
-        val returned: Int
-    ) {
-        data class Item(
-            val name: String,
-            val resourceURI: String
-        )
-    }
-    data class Thumbnail(
-        val extension: String,
-        val path: String
-    )
-}
+)

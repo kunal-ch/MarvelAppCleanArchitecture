@@ -1,14 +1,11 @@
 package com.kc.marvelapp.presentation.character_listing
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kc.marvelapp.domain.repository.MarvelRepository
-import com.kc.marvelapp.domain.use_case.get_characters.GetCharactersUseCase
+import com.kc.marvelapp.domain.usecase.getCharacters.GetCharactersUseCase
 import com.kc.marvelapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
