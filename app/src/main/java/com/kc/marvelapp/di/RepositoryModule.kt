@@ -13,7 +13,6 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
 
     @Binds
-    @Singleton
     abstract fun bindMarvelRepository(
         marvelRepositoryImpl: MarvelRepositoryImpl
     ): MarvelRepository

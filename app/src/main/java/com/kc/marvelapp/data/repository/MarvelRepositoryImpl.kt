@@ -1,6 +1,5 @@
 package com.kc.marvelapp.data.repository
 
-import android.util.Log
 import com.kc.marvelapp.data.mapper.toAllCharactersResponse
 import com.kc.marvelapp.data.service.MarvelApi
 import com.kc.marvelapp.domain.models.ComicCharacter
@@ -13,17 +12,13 @@ import kotlinx.coroutines.flow.flowOn
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Repository Implementation
  */
-@Singleton
 class MarvelRepositoryImpl @Inject constructor(
     private val api: MarvelApi
     ): MarvelRepository {
-
-    private val TAG = "MarvelRepositoryImpl"
 
     override suspend fun getCharacterListings(
     ): Flow<Resource<List<ComicCharacter>>> {
@@ -34,7 +29,6 @@ class MarvelRepositoryImpl @Inject constructor(
                 val response = api.getAllCharacters()
                 if (response.isSuccessful) {
                     response.body()?.let { resultResponse ->
-                        Log.d(TAG, "Fetch all characters successful")
                         resultResponse.toAllCharactersResponse().data.characters
                     }
                 } else {
@@ -51,7 +45,6 @@ class MarvelRepositoryImpl @Inject constructor(
                 null
             }
 
-            Log.d(TAG, "Character List Count : ${remoteListings?.size}")
             remoteListings?.let { listings ->
                 emit(
                     Resource.Success(
@@ -73,7 +66,6 @@ class MarvelRepositoryImpl @Inject constructor(
                 val response = api.getCharacter(id)
                 if (response.isSuccessful) {
                     response.body()?.let { resultResponse ->
-                        Log.d(TAG, "Fetch Character detail successful")
                         resultResponse.toAllCharactersResponse().data.characters
                     }
                 } else {
