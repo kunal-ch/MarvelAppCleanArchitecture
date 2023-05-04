@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.character_info
+package com.kc.marvelapp.presentation.characterInfo
 
 import com.kc.marvelapp.domain.models.ComicCharacter
 

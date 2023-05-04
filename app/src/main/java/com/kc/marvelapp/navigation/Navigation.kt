@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.kc.marvelapp.presentation.character_info.CharacterInfoScreen
-import com.kc.marvelapp.presentation.character_listing.CharacterListingScreen
+import com.kc.marvelapp.presentation.characterInfo.CharacterInfoScreen
+import com.kc.marvelapp.presentation.characterListing.CharacterListingScreen
 
 /**
  * Navigation for compose

@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.character_info
+package com.kc.marvelapp.presentation.characterInfo
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,7 +21,7 @@ class CharacterInfoViewModel @Inject constructor(
     var state by mutableStateOf(CharacterInfoState())
 
     init{
-        val id = savedStateHandle.get<String>("id")
+        val id = savedStateHandle.get<String>(ID)
         if (id != null) {
             getCharacterInfo(id)
         }
@@ -33,9 +33,9 @@ class CharacterInfoViewModel @Inject constructor(
                     when(result) {
                         is Resource.Success -> {
                             result.data?.let { character ->
-                                state = state.copy(
-                                    character = character
-                                )
+                                state = state.copy(character = character)
+                            } ?: run {
+                                state = state.copy(error = EMPTY_ERROR)
                             }
                         }
                         is Resource.Error -> {
@@ -48,5 +48,10 @@ class CharacterInfoViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    companion object {
+        private const val ID = "id"
+        private const val EMPTY_ERROR = "Result is empty"
     }
 }

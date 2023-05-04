@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.character_listing
+package com.kc.marvelapp.presentation.characterListing
 
 import com.kc.marvelapp.domain.models.ComicCharacter
 

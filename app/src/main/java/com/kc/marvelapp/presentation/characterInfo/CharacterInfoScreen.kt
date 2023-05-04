@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.character_info
+package com.kc.marvelapp.presentation.characterInfo
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -26,7 +27,6 @@ import com.skydoves.landscapist.coil.CoilImage
 /**
  * Character Detail Screen
  */
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharacterInfoScreen(
     id: String,
@@ -42,7 +42,7 @@ fun CharacterInfoScreen(
             state.character?.let { character ->
                 TopAppBar(
                     title = {
-                        Text(text = "Marvels App")
+                        Text(text = stringResource(id = R.string.app_name))
                     },
                     backgroundColor = DarkBlue,
                     contentColor = TextWhite,
@@ -91,7 +91,7 @@ fun CharacterInfoScreen(
                     if (state.character.description.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Description: ${character.description}",
+                            text = stringResource(R.string.description) + " ${character.description}",
                             fontSize = 14.sp,
                             modifier = Modifier.fillMaxWidth(),
                             overflow = TextOverflow.Ellipsis
@@ -104,7 +104,7 @@ fun CharacterInfoScreen(
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Comics:",
+                        text = stringResource(R.string.comics),
                         fontSize = 14.sp,
                         modifier = Modifier.fillMaxWidth(),
                         overflow = TextOverflow.Ellipsis

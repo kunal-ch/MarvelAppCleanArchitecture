@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.character_listing
+package com.kc.marvelapp.presentation.characterListing
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,9 +29,9 @@ class CharacterListingViewModel @Inject constructor(
                     when(result) {
                         is Resource.Success -> {
                             result.data?.let { listings ->
-                                state = state.copy(
-                                    characters = listings
-                                )
+                                state = state.copy(characters = listings)
+                            } ?: run {
+                                state = state.copy(error = EMPTY_ERROR)
                             }
                         }
                         is Resource.Error -> {
@@ -44,5 +44,9 @@ class CharacterListingViewModel @Inject constructor(
                     }
                 }
         }
+    }
+
+    companion object {
+        private const val EMPTY_ERROR = "Result is empty"
     }
 }

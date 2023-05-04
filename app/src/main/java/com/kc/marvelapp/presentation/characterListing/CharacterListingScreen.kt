@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.character_listing
+package com.kc.marvelapp.presentation.characterListing
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
