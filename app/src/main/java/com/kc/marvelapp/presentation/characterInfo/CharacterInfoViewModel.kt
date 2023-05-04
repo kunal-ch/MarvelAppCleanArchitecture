@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterInfoViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val useCase: GetCharacterUseCase
 ): ViewModel() {
 
