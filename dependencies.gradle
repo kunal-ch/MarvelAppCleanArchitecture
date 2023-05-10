@@ -1,0 +1,63 @@
+ext {
+    def compatVer = '1.5.0'
+    def coreVer = '1.8.0'
+    def materialComposeVer = '1.2.1'
+    def lifecycleVMVer = '2.5.1'
+    def lifecycleVMComposeVer = '2.4.1'
+    def materialIconsVer = '1.1.0'
+    def activityComposeVer = '1.6.0'
+    def navigationComposeVer = '2.4.0-alpha04'
+    def navHiltVer = '1.0.0'
+    def navUIVer = '2.5.1'
+    def coroutinesVer = '1.6.1'
+    def coilVer = '1.4.3'
+    def retrofitVer = '2.9.0'
+    def okhttpVer = '4.11.0'
+    def hiltVer = '2.40.5'
+    def junitVer = '4.13.2'
+    def truthVer = '1.1.3'
+    def mockkVer = '1.13.2'
+    def turbineVer = '0.7.0'
+    def coroutinesTestVer = '1.6.2'
+    def mockServerVer = '5.0.0-alpha.2'
+
+    kotlin = [
+            lib             : 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version'
+    ]
+    androidX = [
+            compat          : "androidx.appcompat:appcompat:$compatVer",
+            core            : "androidx.core:core-ktx:$coreVer",
+            material        : "androidx.compose.material:material:$materialComposeVer",
+            archComp        : "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVMVer",
+            viewmodel       : "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVMComposeVer",
+            materialIcons   : "androidx.compose.material:material-icons-extended:$materialIconsVer",
+            activity        : "androidx.activity:activity-compose:$activityComposeVer",
+            navigation      : "androidx.navigation:navigation-compose:$navigationComposeVer",
+            navHilt         : "androidx.hilt:hilt-navigation-compose:$navHiltVer",
+            navUI           : "androidx.navigation:navigation-ui-ktx:$navUIVer",
+    ]
+    coroutines = [
+            coroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVer"
+    ]
+    image = [
+            coil            : "com.github.skydoves:landscapist-coil:$coilVer"
+    ]
+    network = [
+            retrofit        : "com.squareup.retrofit2:retrofit:$retrofitVer",
+            gson            : "com.squareup.retrofit2:converter-gson:$retrofitVer",
+            okhttp          : "com.squareup.okhttp3:okhttp:$okhttpVer",
+            okhttpInterceptor: "com.squareup.okhttp3:logging-interceptor:$okhttpVer"
+    ]
+    di = [
+            hilt            : "com.google.dagger:hilt-android:$hiltVer"
+    ]
+    testing = [
+            junit           : "junit:junit:$junitVer",
+            truth           : "com.google.truth:truth:$truthVer",
+            mockk           : "io.mockk:mockk:$mockkVer",
+            turbine         : "app.cash.turbine:turbine:$turbineVer",
+            coroutines      : "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesTestVer",
+            mockwebserver   : "com.squareup.okhttp3:mockwebserver3:$mockServerVer",
+            hiltTesting     : "com.google.dagger:hilt-android-testing:$hiltVer"
+    ]
+}
