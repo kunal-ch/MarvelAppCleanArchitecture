@@ -26,4 +26,12 @@ class UtilsTest {
         val result = Utils.getDate(input)
         assertThat(result).isEmpty()
     }
+
+    @Test
+    fun getDateInvalidInput(){
+        val input = "12"
+        val output = "October 25, 2013"
+        val result = Utils.getDate(input)
+        assertThat(result).isNotEqualTo(output)
+    }
 }

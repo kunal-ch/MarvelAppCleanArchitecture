@@ -5,6 +5,7 @@ import com.kc.marvelapp.data.mapper.toAllCharactersResponse
 import com.kc.marvelapp.data.service.FileUtils
 import com.kc.marvelapp.data.service.dto.*
 import com.kc.marvelapp.domain.models.ComicCharacter
+import com.kc.marvelapp.util.Constants
 import com.kc.marvelapp.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -21,7 +22,10 @@ class MarvelRepositoryFake: MarvelRepository {
     override suspend fun getCharacterInfo(id: String): Flow<Resource<ComicCharacter>> {
         return flow {
             emit(Resource.Loading(true))
-            emit(Resource.Success(getCharacterResponse()[0]))
+            if (id == Constants.fakeId)
+                emit(Resource.Success(getCharacterResponse()[0]))
+            else
+                emit(Resource.Error("Could not load data"))
             emit(Resource.Loading(false))
         }
     }

@@ -1,6 +1,7 @@
 package com.kc.marvelapp.data.service
 
 import com.google.common.truth.Truth.assertThat
+import com.kc.marvelapp.util.Constants
 import kotlinx.coroutines.runBlocking
 import mockwebserver3.MockResponse
 import mockwebserver3.MockWebServer
@@ -16,7 +17,6 @@ import java.util.concurrent.TimeUnit
 class NetworkTest {
     private var mockWebServer: MockWebServer = MockWebServer()
     private var api: MarvelApi
-
     init {
         val client = OkHttpClient.Builder()
             .connectTimeout(1, TimeUnit.SECONDS)
@@ -83,6 +83,32 @@ class NetworkTest {
         runBlocking {
             val actualResponse = api.getAllCharacters()
             assertThat(actualResponse.body()?.dataDto?.count).isEqualTo(20)
+        }
+    }
+
+    @Test
+    fun `fetch character correctly with 200 response`() {
+        val body = FileUtils.readTestResourceFile("success_response.json")
+        val response = MockResponse()
+            .setResponseCode(HttpURLConnection.HTTP_OK)
+            .setBody(body)
+        mockWebServer.enqueue(response)
+        runBlocking {
+            val actualResponse = api.getCharacter(Constants.fakeId)
+            assertThat(actualResponse.code().toString().contains("200")).isEqualTo(response.toString().contains("200"))
+        }
+    }
+
+    @Test
+    fun `fetch character with 400 bad request`() {
+        val body = FileUtils.readTestResourceFile("success_response.json")
+        val response = MockResponse()
+            .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
+            .setBody(body)
+        mockWebServer.enqueue(response)
+        runBlocking {
+            val actualResponse = api.getCharacter(Constants.fakeId)
+            assertThat(actualResponse.code().toString().contains("400")).isEqualTo(response.toString().contains("400"))
         }
     }
 }
