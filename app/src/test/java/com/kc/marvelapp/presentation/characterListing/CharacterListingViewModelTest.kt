@@ -17,7 +17,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class CharacterListingViewModelTest {
-
     private lateinit var characterListingViewModel: CharacterListingViewModel
     private lateinit var getCharactersUseCase: GetCharactersUseCase
     private lateinit var fakeRepository: MarvelRepositoryFake

@@ -18,7 +18,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class CharacterInfoViewModelTest {
-
     private lateinit var characterInfoViewModel: CharacterInfoViewModel
     private lateinit var getCharacterUseCase: GetCharacterUseCase
     private lateinit var fakeRepository: MarvelRepositoryFake

@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class MarvelRepositoryFake: MarvelRepository {
-
     override suspend fun getCharacterListings(): Flow<Resource<List<ComicCharacter>>> {
         return flow {
             emit(Resource.Loading(true))
