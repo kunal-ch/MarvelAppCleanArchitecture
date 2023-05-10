@@ -37,9 +37,9 @@ import com.skydoves.landscapist.coil.CoilImage
 @Composable
 fun CharacterInfoScreen(
     id: String,
-    viewModel: CharacterInfoViewModel = hiltViewModel()
+    viewModel: CharacterInfoViewModel = hiltViewModel(),
+    state: CharacterInfoState = viewModel.state
 ) {
-    val state = viewModel.state
     if(state.error == null) {
         Column(
             modifier = Modifier

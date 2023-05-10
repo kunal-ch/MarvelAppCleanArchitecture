@@ -28,35 +28,37 @@ import com.kc.marvelapp.presentation.components.Toolbar
 @Composable
 fun CharacterListingScreen(
     navController: NavController,
-    viewModel: CharacterListingViewModel = hiltViewModel()
+    viewModel: CharacterListingViewModel = hiltViewModel(),
+    state: CharacterListingState = viewModel.state,
 ) {
-    val state = viewModel.state
     if (state.error == null) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
             Toolbar(title = stringResource(id = R.string.app_name))
             Divider()
-            LazyColumn(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(state.characters.size) { i ->
-                    val character = state.characters[i]
-                    CharacterItem(
-                        character = character,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                navController.navigate(Screen.CharacterInfoScreen.withArgs(character.id.toString()))
-                            }
-                            .padding(16.dp)
-                    )
-                    if (i < state.characters.size) {
-                        Divider(
-                            modifier = Modifier.padding(
-                                horizontal = 16.dp
-                            )
+            if (state.characters.isNotEmpty()) {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(state.characters.size) { i ->
+                        val character = state.characters[i]
+                        CharacterItem(
+                            character = character,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable {
+                                    navController.navigate(Screen.CharacterInfoScreen.withArgs(character.id.toString()))
+                                }
+                                .padding(16.dp)
                         )
+                        if (i < state.characters.size) {
+                            Divider(
+                                modifier = Modifier.padding(
+                                    horizontal = 16.dp
+                                )
+                            )
+                        }
                     }
                 }
             }
