@@ -1,5 +1,6 @@
 package com.kc.marvelapp.presentation.components
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
@@ -15,7 +16,10 @@ fun Toolbar(
 ) {
     TopAppBar(
         title = {
-            Text(text = title)
+            CustomText(
+                text = title,
+                style = (MaterialTheme.typography).h4
+            )
         },
         modifier = modifier,
         backgroundColor = DarkBlue,

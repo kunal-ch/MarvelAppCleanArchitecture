@@ -1,20 +1,22 @@
 package com.kc.marvelapp.presentation.characterListing
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.kc.marvelapp.domain.models.ComicCharacter
+import com.kc.marvelapp.presentation.components.CustomText
 import com.kc.marvelapp.util.Utils
 import com.skydoves.landscapist.coil.CoilImage
 
@@ -42,22 +44,16 @@ fun CharacterItem(
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text(
+                CustomText(
                     text = character.name,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 16.sp,
-                    color = MaterialTheme.colors.onBackground,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1,
-                    modifier = Modifier.weight(1f)
+                    style = (MaterialTheme.typography).h6,
                 )
                 Spacer(modifier = Modifier.width(4.dp))
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            CustomText(
                 text = Utils.getDate(character.modified),
                 fontStyle = FontStyle.Italic,
-                color = MaterialTheme.colors.onBackground
             )
         }
     }

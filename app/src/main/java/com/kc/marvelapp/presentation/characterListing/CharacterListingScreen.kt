@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.kc.marvelapp.R
 import com.kc.marvelapp.navigation.Screen
+import com.kc.marvelapp.presentation.components.CustomText
 import com.kc.marvelapp.presentation.components.Toolbar
 
 /**
@@ -48,7 +48,11 @@ fun CharacterListingScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clickable {
-                                    navController.navigate(Screen.CharacterInfoScreen.withArgs(character.id.toString()))
+                                    navController.navigate(
+                                        Screen.CharacterInfoScreen.withArgs(
+                                            character.id.toString()
+                                        )
+                                    )
                                 }
                                 .padding(16.dp)
                         )
@@ -71,7 +75,7 @@ fun CharacterListingScreen(
         if(state.isLoading) {
             CircularProgressIndicator()
         } else if(state.error != null) {
-            Text(
+            CustomText(
                 text = state.error,
                 color = MaterialTheme.colors.error
             )

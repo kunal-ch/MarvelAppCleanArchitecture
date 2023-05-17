@@ -28,7 +28,7 @@ fun ChipText(
             color = colorResource(R.color.white)
         )
     ){
-        Text(text = title, modifier = modifier
+        CustomText(text = title, modifier = modifier
             .padding(8.dp)
             .background(DarkBlue))
     }

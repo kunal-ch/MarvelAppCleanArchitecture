@@ -41,7 +41,7 @@ class MarvelRepositoryImpl @Inject constructor(
     ): Flow<Resource<ComicCharacter>> {
         return flow<Resource<ComicCharacter>> {
             emit(Resource.Loading(true))
-            val remoteListings = getList(api)
+            val remoteListings = getDetail(api, id)
             remoteListings?.let { remoteListings
                 if (remoteListings.isNotEmpty()) {
                     emit(Resource.Success(data = remoteListings[0]))
@@ -56,6 +56,25 @@ class MarvelRepositoryImpl @Inject constructor(
     private suspend fun getList(api : MarvelApi) : List<ComicCharacter>? {
         val remoteListings = try {
             val response = api.getAllCharacters()
+            if (response.isSuccessful) {
+                response.body()?.toAllCharactersResponse()?.data?.characters
+            } else {
+                listOf()
+            }
+        }  catch (e: HttpException) {
+            e.printStackTrace()
+            null
+        }
+        catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+        return remoteListings
+    }
+
+    private suspend fun getDetail(api : MarvelApi, id: String) : List<ComicCharacter>? {
+        val remoteListings = try {
+            val response = api.getCharacter(id)
             if (response.isSuccessful) {
                 response.body()?.toAllCharactersResponse()?.data?.characters
             } else {

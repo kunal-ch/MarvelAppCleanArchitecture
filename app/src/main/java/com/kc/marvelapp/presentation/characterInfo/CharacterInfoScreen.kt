@@ -12,20 +12,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.kc.marvelapp.R
 import com.kc.marvelapp.presentation.components.ChipText
+import com.kc.marvelapp.presentation.components.CustomText
 import com.kc.marvelapp.presentation.components.Toolbar
 import com.kc.marvelapp.ui.theme.DarkBlue
 import com.kc.marvelapp.util.Utils
@@ -65,21 +62,16 @@ fun CharacterInfoScreen(
                         .padding(16.dp)
                 ) {
                     // Name
-                    Text(
+                    CustomText(
                         text = character.name,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 18.sp,
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.fillMaxWidth()
+                        style = MaterialTheme.typography.h6,
                     )
                     Spacer(modifier = Modifier.height(8.dp))
 
                     // Modified
-                    Text(
+                    CustomText(
                         text = Utils.getDate(character.modified),
-                        fontStyle = FontStyle.Italic,
-                        fontSize = 14.sp,
-                        modifier = Modifier.fillMaxWidth()
+                        fontStyle = FontStyle.Italic
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Divider(
@@ -90,11 +82,10 @@ fun CharacterInfoScreen(
                     // Description
                     if (state.character.description.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(8.dp))
-                        Text(
+                        CustomText(
                             text = stringResource(R.string.description) + " ${character.description}",
-                            fontSize = 14.sp,
-                            modifier = Modifier.fillMaxWidth(),
-                            overflow = TextOverflow.Ellipsis
+                            maxLines = Int.MAX_VALUE,
+                            style = MaterialTheme.typography.body2
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         Divider(
@@ -103,11 +94,8 @@ fun CharacterInfoScreen(
                         )
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    Text(
+                    CustomText(
                         text = stringResource(R.string.comics),
-                        fontSize = 14.sp,
-                        modifier = Modifier.fillMaxWidth(),
-                        overflow = TextOverflow.Ellipsis
                     )
                     Spacer(modifier = Modifier.height(8.dp))
 
@@ -130,9 +118,9 @@ fun CharacterInfoScreen(
         if(state.isLoading) {
             CircularProgressIndicator()
         } else if(state.error != null) {
-            Text(
+            CustomText(
                 text = state.error,
-                color = MaterialTheme.colors.error
+                color = MaterialTheme.colors.error,
             )
         }
     }

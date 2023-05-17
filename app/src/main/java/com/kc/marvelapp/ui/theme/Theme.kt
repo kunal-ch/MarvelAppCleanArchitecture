@@ -20,7 +20,7 @@ fun MarvelAppTheme(
 ) {
     MaterialTheme(
         colors = DarkColorPalette,
-        typography = Typography,
+        typography = myTypography,
         shapes = Shapes,
         content = content
     )
