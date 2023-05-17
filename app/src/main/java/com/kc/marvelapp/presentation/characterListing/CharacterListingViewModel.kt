@@ -28,11 +28,7 @@ class CharacterListingViewModel @Inject constructor(
             useCase().collect { result ->
                     when(result) {
                         is Resource.Success -> {
-                            result.data?.let { listings ->
-                                state = state.copy(characters = listings)
-                            } ?: run {
-                                state = state.copy(error = EMPTY_ERROR)
-                            }
+                            state = state.copy(characters = result.data)
                         }
                         is Resource.Error -> {
                             state = state.copy(isLoading = false)
@@ -44,9 +40,5 @@ class CharacterListingViewModel @Inject constructor(
                     }
                 }
         }
-    }
-
-    companion object {
-        private const val EMPTY_ERROR = "Result is empty"
     }
 }

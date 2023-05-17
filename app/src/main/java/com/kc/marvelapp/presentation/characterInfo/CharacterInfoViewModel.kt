@@ -32,11 +32,7 @@ class CharacterInfoViewModel @Inject constructor(
             useCase(id).collect { result ->
                     when(result) {
                         is Resource.Success -> {
-                            result.data?.let { character ->
-                                state = state.copy(character = character)
-                            } ?: run {
-                                state = state.copy(error = EMPTY_ERROR)
-                            }
+                            state = state.copy(character = result.data)
                         }
                         is Resource.Error -> {
                             state = state.copy(isLoading = false)
@@ -49,9 +45,7 @@ class CharacterInfoViewModel @Inject constructor(
                 }
         }
     }
-
     companion object {
         private const val ID = "id"
-        private const val EMPTY_ERROR = "Result is empty"
     }
 }
