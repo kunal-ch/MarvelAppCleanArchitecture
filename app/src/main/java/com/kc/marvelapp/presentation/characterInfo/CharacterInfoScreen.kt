@@ -35,8 +35,9 @@ import com.skydoves.landscapist.coil.CoilImage
 fun CharacterInfoScreen(
     id: String,
     viewModel: CharacterInfoViewModel = hiltViewModel(),
-    state: CharacterInfoState = viewModel.state
+    vmState: CharacterInfoState = viewModel.state
 ) {
+    val state = vmState
     if(state.error == null) {
         Column(
             modifier = Modifier

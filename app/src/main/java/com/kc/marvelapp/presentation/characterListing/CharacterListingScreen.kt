@@ -29,8 +29,9 @@ import com.kc.marvelapp.presentation.components.Toolbar
 fun CharacterListingScreen(
     navController: NavController,
     viewModel: CharacterListingViewModel = hiltViewModel(),
-    state: CharacterListingState = viewModel.state,
+    vmState: CharacterListingState = viewModel.state,
 ) {
+    val state = vmState
     if (state.error == null) {
         Column(
             modifier = Modifier.fillMaxSize()
