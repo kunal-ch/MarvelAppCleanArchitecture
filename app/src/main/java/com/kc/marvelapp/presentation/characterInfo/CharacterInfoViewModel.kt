@@ -27,9 +27,9 @@ class CharacterInfoViewModel @Inject constructor(
         }
     }
 
-    private fun getCharacterInfo(id: String) {
+    fun getCharacterInfo(id: String) {
         viewModelScope.launch {
-            useCase(id).collect { result ->
+            useCase.getCharacterInfo(id).collect { result ->
                     when(result) {
                         is Resource.Success -> {
                             state = state.copy(character = result.data)

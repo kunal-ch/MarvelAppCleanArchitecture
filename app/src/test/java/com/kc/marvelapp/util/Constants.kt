@@ -1,5 +1,5 @@
 package com.kc.marvelapp.util
 
 object Constants {
-    const val fakeId = "1010334"
+    const val id = "1011334"
 }

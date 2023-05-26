@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetCharacterUseCase @Inject constructor(
     private val repository: MarvelRepository
 ) {
-    suspend operator fun invoke(id: String) = repository.getCharacterInfo(id)
+    suspend fun getCharacterInfo(id: String) = repository.getCharacterInfo(id)
 }

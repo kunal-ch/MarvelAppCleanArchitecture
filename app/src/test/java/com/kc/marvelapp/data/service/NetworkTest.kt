@@ -43,13 +43,13 @@ class NetworkTest {
 
     @Test
     fun `read success response json file`(){
-        val response = FileUtils.readTestResourceFile("success_response.json")
+        val response = FileUtils.readTestResourceFile("character_list.json")
         assertThat(response).isNotNull()
     }
 
     @Test
     fun `fetch character list correctly with 200 response`() {
-        val body = FileUtils.readTestResourceFile("success_response.json")
+        val body = FileUtils.readTestResourceFile("character_list.json")
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(body)
@@ -62,7 +62,7 @@ class NetworkTest {
 
     @Test
     fun `fetch character list with 400 bad request`() {
-        val body = FileUtils.readTestResourceFile("success_response.json")
+        val body = FileUtils.readTestResourceFile("character_list.json")
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
             .setBody(body)
@@ -74,8 +74,8 @@ class NetworkTest {
     }
 
     @Test
-    fun `fetch character list android count characters`() {
-        val body = FileUtils.readTestResourceFile("success_response.json")
+    fun `fetch character list and count characters`() {
+        val body = FileUtils.readTestResourceFile("character_list.json")
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(body)
@@ -88,26 +88,26 @@ class NetworkTest {
 
     @Test
     fun `fetch character correctly with 200 response`() {
-        val body = FileUtils.readTestResourceFile("success_response.json")
+        val body = FileUtils.readTestResourceFile("character_list.json")
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_OK)
             .setBody(body)
         mockWebServer.enqueue(response)
         runBlocking {
-            val actualResponse = api.getCharacter(Constants.fakeId)
+            val actualResponse = api.getCharacter(Constants.id)
             assertThat(actualResponse.code().toString().contains("200")).isEqualTo(response.toString().contains("200"))
         }
     }
 
     @Test
     fun `fetch character with 400 bad request`() {
-        val body = FileUtils.readTestResourceFile("success_response.json")
+        val body = FileUtils.readTestResourceFile("character_list.json")
         val response = MockResponse()
             .setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
             .setBody(body)
         mockWebServer.enqueue(response)
         runBlocking {
-            val actualResponse = api.getCharacter(Constants.fakeId)
+            val actualResponse = api.getCharacter(Constants.id)
             assertThat(actualResponse.code().toString().contains("400")).isEqualTo(response.toString().contains("400"))
         }
     }

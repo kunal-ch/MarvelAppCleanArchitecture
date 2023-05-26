@@ -22,10 +22,10 @@ class CharacterListingViewModel @Inject constructor(
         getCharacterListings()
     }
 
-    private fun getCharacterListings(
+    fun getCharacterListings(
     ) {
         viewModelScope.launch {
-            useCase().collect { result ->
+            useCase.getCharacterList().collect { result ->
                     when(result) {
                         is Resource.Success -> {
                             state = state.copy(characters = result.data)
