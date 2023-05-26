@@ -1,4 +1,4 @@
-package com.kc.marvelapp.presentation.characterListing
+package com.kc.marvelapp.domain.usecase.getCharacters
 
 import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
@@ -7,7 +7,7 @@ import com.kc.marvelapp.data.mapper.toAllCharactersResponse
 import com.kc.marvelapp.data.service.FileUtils
 import com.kc.marvelapp.data.service.dto.AllCharactersResponseDto
 import com.kc.marvelapp.domain.models.ComicCharacter
-import com.kc.marvelapp.domain.usecase.getCharacters.GetCharactersUseCase
+import com.kc.marvelapp.domain.repository.MarvelRepository
 import com.kc.marvelapp.util.Resource
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -20,18 +20,17 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class CharacterListingViewModelTest {
-    private var charactersUseCase = mockk<GetCharactersUseCase>(relaxed = true)
-    private lateinit var characterListingViewModel: CharacterListingViewModel
+class GetCharactersUseCaseTest {
+    private var repository = mockk<MarvelRepository>(relaxed = true)
+    private var charactersUseCase = GetCharactersUseCase(repository)
 
     @ExperimentalCoroutinesApi
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
 
     @Before
-    fun setupCharacterListingViewModel() {
+    fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
-        characterListingViewModel = CharacterListingViewModel(charactersUseCase)
     }
 
     private fun getCharacterListResponse(): List<ComicCharacter> {
@@ -45,11 +44,18 @@ class CharacterListingViewModelTest {
             emit(Resource.Success(getCharacterListResponse()))
         }
 
-        coEvery { charactersUseCase.getCharacterList()} returns flow
+        coEvery { repository.getCharacterListings()} returns flow
 
-        characterListingViewModel.getCharacterListings()
-        val stateSuccess = characterListingViewModel.state.characters
-        assertThat(stateSuccess).isNotEmpty()
+        charactersUseCase.getCharacterList().collect {
+            when(it){
+                is Resource.Success -> {
+                    assertThat(it.data).isNotEmpty()
+                }
+                else -> {
+                    assert(false)
+                }
+            }
+        }
     }
 
     @Test
@@ -58,11 +64,18 @@ class CharacterListingViewModelTest {
             emit(Resource.Loading(true))
         }
 
-        coEvery { charactersUseCase.getCharacterList()} returns flow
+        coEvery { repository.getCharacterListings()} returns flow
 
-        characterListingViewModel.getCharacterListings()
-        val stateLoading = characterListingViewModel.state.isLoading
-        assertThat(stateLoading).isNotNull()
+        charactersUseCase.getCharacterList().collect {
+            when(it){
+                is Resource.Loading -> {
+                    assertThat(it.isLoading).isEqualTo(true)
+                }
+                else -> {
+                    assert(false)
+                }
+            }
+        }
     }
 
     @Test
@@ -71,23 +84,17 @@ class CharacterListingViewModelTest {
             emit(Resource.Error("Something went wrong"))
         }
 
-        coEvery { charactersUseCase.getCharacterList()} returns flow
+        coEvery { repository.getCharacterListings()} returns flow
 
-        characterListingViewModel.getCharacterListings()
-        val stateError = characterListingViewModel.state.error
-        assertThat(stateError).isEqualTo("Something went wrong")
-    }
-
-    @Test
-    fun fetchCharacterListSizeTest() = runTest {
-        val flow = flow {
-            emit(Resource.Success(getCharacterListResponse()))
+        charactersUseCase.getCharacterList().collect {
+            when(it){
+                is Resource.Error -> {
+                    assertThat(it.message).isEqualTo("Something went wrong")
+                }
+                else -> {
+                    assert(false)
+                }
+            }
         }
-
-        coEvery { charactersUseCase.getCharacterList()} returns flow
-
-        characterListingViewModel.getCharacterListings()
-        val stateSuccess = characterListingViewModel.state.characters
-        assertThat(stateSuccess).hasSize(20)
     }
 }
